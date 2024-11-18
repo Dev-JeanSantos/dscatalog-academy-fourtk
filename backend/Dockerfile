@@ -10,6 +10,9 @@ RUN wget https://services.gradle.org/distributions/gradle-8.4-bin.zip -P /tmp &&
     unzip /tmp/gradle-8.4-bin.zip -d /opt && \
     ln -s /opt/gradle-8.4/bin/gradle /usr/bin/gradle
 
+# Verifique a instalação do Gradle
+RUN gradle -v
+
 # Copiar os arquivos do projeto para o contêiner
 COPY . /app
 
@@ -17,7 +20,7 @@ COPY . /app
 WORKDIR /app
 
 # Execute o build com Gradle (omitindo testes)
-RUN gradle clean build -x test
+RUN gradle clean build -x test --stacktrace
 
 # Etapa de execução usando a imagem slim do OpenJDK
 FROM openjdk:17-jdk-slim
