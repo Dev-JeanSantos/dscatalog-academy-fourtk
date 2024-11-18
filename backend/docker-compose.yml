@@ -1,25 +1,30 @@
-version: '3.8'
-
 services:
-  postgres:
-    image: postgres:15
+  postgres_container:
+    image: postgres:13
     container_name: postgres_container
-    restart: always
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: secret
       POSTGRES_DB: dscatalog
     ports:
       - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
     networks:
-      - postgres_network
+      - app_network
 
-volumes:
-  postgres_data:
-    driver: local
+  spring_app:
+    build: .
+    container_name: spring_app
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres_container:5432/dscatalog
+      - SPRING_DATASOURCE_USERNAME=admin
+      - SPRING_DATASOURCE_PASSWORD=secret
+    depends_on:
+      - postgres_container
+    networks:
+      - app_network
+    ports:
+      - "8080:8080"
 
 networks:
-  postgres_network:
+  app_network:
     driver: bridge
