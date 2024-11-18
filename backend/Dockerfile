@@ -14,7 +14,7 @@ RUN wget https://services.gradle.org/distributions/gradle-8.4-bin.zip -P /tmp &&
 RUN gradle -v
 
 # Copiar os arquivos do projeto para o contêiner (garanta que os arquivos Gradle sejam copiados)
-COPY . /app
+COPY ./backend /app
 
 # Defina o diretório de trabalho
 WORKDIR /app
