@@ -13,7 +13,7 @@ RUN wget https://services.gradle.org/distributions/gradle-8.4-bin.zip -P /tmp &&
 # Verifique a instalação do Gradle
 RUN gradle -v
 
-# Copiar os arquivos do projeto para o contêiner
+# Copiar os arquivos do projeto para o contêiner (garanta que os arquivos Gradle sejam copiados)
 COPY . /app
 
 # Defina o diretório de trabalho
