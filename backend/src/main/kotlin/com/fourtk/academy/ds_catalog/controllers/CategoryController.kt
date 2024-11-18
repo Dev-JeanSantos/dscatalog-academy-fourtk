@@ -41,7 +41,6 @@ class CategoryController(
                 "[CREATE-PRODUCT]-[Controller] The hiring process was successfully completed"
             }
         }.getOrThrow()
-
     }
 
 

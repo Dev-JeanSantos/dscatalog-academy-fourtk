@@ -38,9 +38,13 @@ dependencies {
 	implementation("org.mapstruct:mapstruct:1.6.3") // Versão principal do MapStruct
 	kapt("org.mapstruct:mapstruct-processor:1.6.3") // Processador de anotações
 
+	// OPENAPI
+	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0")
+
 	// Banco de dados
 	runtimeOnly("com.h2database:h2")
 	runtimeOnly("org.postgresql:postgresql")
+
 
 	// Testes
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
