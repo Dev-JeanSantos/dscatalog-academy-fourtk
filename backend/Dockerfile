@@ -1,9 +1,9 @@
 # Etapa de build usando uma imagem do Ubuntu
 FROM ubuntu:latest AS build
 
-# Atualize o sistema e instale o OpenJDK 17
+# Atualize o sistema, instale o OpenJDK 17, wget e unzip
 RUN apt-get update && \
-    apt-get install -y openjdk-17-jdk wget
+    apt-get install -y openjdk-17-jdk wget unzip
 
 # Instalar o Gradle
 RUN wget https://services.gradle.org/distributions/gradle-8.4-bin.zip -P /tmp && \
