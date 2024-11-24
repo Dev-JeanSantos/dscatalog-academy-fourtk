@@ -9,4 +9,5 @@ import org.springframework.data.domain.Pageable
 interface ICategoryService {
     fun saved(request: Category): CategoryResponseDTO
     fun getAll(name: String?, pagination: Pageable): Page<CategoryGetResponseDTO>
+    fun findByName(name: String): CategoryGetResponseDTO
 }

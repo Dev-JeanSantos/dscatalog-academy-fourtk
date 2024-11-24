@@ -11,19 +11,19 @@ services:
     networks:
       - app_network
 
-  spring_app:
-    build: .
-    container_name: spring_app
-    environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres_container:5432/dscatalog
-      - SPRING_DATASOURCE_USERNAME=admin
-      - SPRING_DATASOURCE_PASSWORD=secret
-    depends_on:
-      - postgres_container
-    networks:
-      - app_network
-    ports:
-      - "8080:8080"
+#  spring_app:
+#    build: .
+#    container_name: spring_app
+#    environment:
+#      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres_container:5432/dscatalog
+#      - SPRING_DATASOURCE_USERNAME=admin
+#      - SPRING_DATASOURCE_PASSWORD=secret
+#    depends_on:
+#      - postgres_container
+#    networks:
+#      - app_network
+#    ports:
+#      - "8080:8080"
 
 networks:
   app_network:

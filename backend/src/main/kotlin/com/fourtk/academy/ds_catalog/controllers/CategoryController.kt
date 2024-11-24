@@ -62,4 +62,17 @@ class CategoryController(
             logger.info { "[GET-CATEGORIES]-[Controller] Successfully fetched categories" }
         }.getOrThrow()
     }
+    @GetMapping("/{name}")
+    fun update(@PathVariable name: String) : ResponseEntity<CategoryGetResponseDTO> {
+        return runCatching {
+            logger.info { "[GET-CATEGORY BY NAME]-[Controller] Fetching category" }
+            ResponseEntity(
+                categoryService.findByName(name), HttpStatus.OK
+            )
+        }.onFailure {
+            logger.error { "Category not found" }
+        }.onSuccess {
+            logger.info { "[GET-CATEGORY BY NAME]-[Controller] Successfully category" }
+        }.getOrThrow()
+    }
 }
