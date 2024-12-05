@@ -63,7 +63,7 @@ class CategoryController(
         }.getOrThrow()
     }
     @GetMapping("/{name}")
-    fun update(@PathVariable name: String) : ResponseEntity<CategoryGetResponseDTO> {
+    fun getByName(@PathVariable name: String) : ResponseEntity<CategoryGetResponseDTO> {
         return runCatching {
             logger.info { "[GET-CATEGORY BY NAME]-[Controller] Fetching category" }
             ResponseEntity(
@@ -73,6 +73,29 @@ class CategoryController(
             logger.error { "Category not found" }
         }.onSuccess {
             logger.info { "[GET-CATEGORY BY NAME]-[Controller] Successfully category" }
+        }.getOrThrow()
+    }
+
+    @PutMapping("/{id}")
+    fun updated(
+        @PathVariable id: Long,
+        @Valid @RequestBody requested: CategoryRequestDTO
+    ): ResponseEntity<CategoryResponseDTO>{
+        return runCatching {
+            logger.info {
+                "[UPDATE-PRODUCT]-[Controller] Starting the updated Category name:[${requested}]"
+            }
+            ResponseEntity(
+                categoryService.update(id, requested.name),
+                HttpStatus.CREATED            )
+        }.onFailure {
+            logger.error {
+                "[UPDATE-PRODUCT]-[Controller] failed"
+            }
+        }.onSuccess {
+            logger.info {
+                "[UPDATE-PRODUCT]-[Controller] The hiring process was successfully completed"
+            }
         }.getOrThrow()
     }
 }

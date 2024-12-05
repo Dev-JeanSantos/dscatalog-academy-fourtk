@@ -40,4 +40,16 @@ class CategoryService(
             .orElseThrow { NotFoundException("Category with name $name not found") }
         return categoryMapper.toEntityDTOListResponse(category)
     }
+
+    override fun update(id: Long, name: String): CategoryResponseDTO {
+        val category: Category = categoryRepository.findById(id)
+            .orElseThrow { NotFoundException("Category with id $id not found") }
+        return if (category.name != name){
+            val categorySaved = category.copy(name=name)
+            categoryRepository.save(categorySaved)
+            CategoryResponseDTO(message = "Category update successfully")
+        }else{
+            CategoryResponseDTO(message = "Category not update successfully")
+        }
+    }
 }
