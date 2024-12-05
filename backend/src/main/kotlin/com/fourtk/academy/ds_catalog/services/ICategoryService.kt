@@ -11,4 +11,5 @@ interface ICategoryService {
     fun getAll(name: String?, pagination: Pageable): Page<CategoryGetResponseDTO>
     fun findByName(name: String): CategoryGetResponseDTO
     fun update(int: Long, name: String): CategoryResponseDTO
+    abstract fun delete(id: Long): String
 }

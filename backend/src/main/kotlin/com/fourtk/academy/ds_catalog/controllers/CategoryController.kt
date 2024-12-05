@@ -87,14 +87,35 @@ class CategoryController(
             }
             ResponseEntity(
                 categoryService.update(id, requested.name),
-                HttpStatus.CREATED            )
+                HttpStatus.OK            )
         }.onFailure {
             logger.error {
                 "[UPDATE-PRODUCT]-[Controller] failed"
             }
         }.onSuccess {
             logger.info {
-                "[UPDATE-PRODUCT]-[Controller] The hiring process was successfully completed"
+                "[UPDATE-PRODUCT]-[Controller] The updated process was successfully completed"
+            }
+        }.getOrThrow()
+    }
+    @DeleteMapping("/{id}")
+    fun delete(
+        @PathVariable id: Long,
+    ): ResponseEntity<String>{
+        return runCatching {
+            logger.info {
+                "[DELETE-PRODUCT]-[Controller] Starting the deleted Category Id:[${id}]"
+            }
+            ResponseEntity(
+                categoryService.delete(id),
+                HttpStatus.OK            )
+        }.onFailure {
+            logger.error {
+                "[DELETE-PRODUCT]-[Controller] failed"
+            }
+        }.onSuccess {
+            logger.info {
+                "[DELETE-PRODUCT]-[Controller] The deleted process was successfully completed"
             }
         }.getOrThrow()
     }
